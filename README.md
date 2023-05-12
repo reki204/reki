@@ -1,7 +1,6 @@
 # 卒業制作　GuideMapper
 
 ### 技術選定
-[卒業制作](https://catkin-snail-cc7.notion.site/5415fb8e1cbe439bb58b9a4dcc849b67)
 
 ## 製品概要
 
