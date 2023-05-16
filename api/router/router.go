@@ -9,19 +9,8 @@ import (
 )
 
 func SetRouting(ctx context.Context, router *gin.Engine) error {
-	// 404エラー
-	router.NoRoute(func(c *gin.Context) {
-		c.JSON(http.StatusNotFound, gin.H{
-			"message": "Not Found",
-		})
-	})
-
-	// 500エラー
-	router.NoMethod(func(c *gin.Context) {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"message": "Internal Server Error",
-		})
-	})
+	router.NoRoute(handleNotFound)
+	router.NoMethod(handleInternalServerError)
 
 	// ルーティング設定
 	groupRoute := router.Group("/api/v1")
@@ -29,4 +18,18 @@ func SetRouting(ctx context.Context, router *gin.Engine) error {
 	groupRoute.GET("/", apiCheckhandler.GetMessage)
 
 	return nil
+}
+
+// 404 Not Found handler
+func handleNotFound(c *gin.Context) {
+	c.JSON(http.StatusNotFound, gin.H{
+		"message": "Not Found",
+	})
+}
+
+// 500 Internal Server Error handler
+func handleInternalServerError(c *gin.Context) {
+	c.JSON(http.StatusInternalServerError, gin.H{
+		"message": "Internal Server Error",
+	})
 }
