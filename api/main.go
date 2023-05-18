@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
+
 	"github.com/reki204/reki/server"
 )
 
 func main() {
-	server.Init()
+	server.Init(context.Background())
 }

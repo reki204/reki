@@ -1,60 +1,35 @@
 package server
 
 import (
+	"context"
 	"log"
-	"time"
 
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/reki204/reki/handler"
+	routes "github.com/reki204/reki/router"
 )
 
-func Init() {
-	r := router()
-	if err := r.Run(); err != nil {
+// Init initializes the server.
+func Init(ctx context.Context) error {
+	router := NewRouter(ctx)
+	// Initialize routing
+	if err := routes.SetRouting(ctx, router); err != nil {
+		return err
+	}
+
+	if err := router.Run(); err != nil {
 		log.Fatalf(err.Error())
 	}
+
+	return nil
 }
 
-func router() *gin.Engine {
+// NewRouter creates a new Gin router.
+func NewRouter(ctx context.Context) *gin.Engine {
 	r := gin.Default()
 	r.HandleMethodNotAllowed = true
 
-	r.Use(setCORS(r))
-
-	// ルーティング
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "welcome",
-		})
-	})
-
-	// 404エラー
-	r.NoRoute(func(c *gin.Context) {
-		c.JSON(404, gin.H{
-			"message": "Not Found",
-		})
-	})
-
-	// 500エラー
-	r.NoMethod(func(c *gin.Context) {
-		c.JSON(500, gin.H{
-				"message": "Internal Server Error",
-		})
-	})
+	r.Use(handler.SetCORS(r))
 
 	return r
-}
-
-// CORS
-func setCORS(r *gin.Engine) gin.HandlerFunc {
-	return func(c *gin.Context) {
-		r.Use(cors.New(cors.Config{
-			AllowOrigins: []string{"http://localhost:3000",},
-			AllowMethods: []string{"POST","GET","OPTIONS",},
-			AllowHeaders: []string{"Content-Type",},
-			AllowCredentials: true,
-			MaxAge: 24 * time.Hour,
-		}))
-		c.Next()
-	}
 }
