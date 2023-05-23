@@ -3,6 +3,7 @@ module github.com/reki204/reki
 go 1.18
 
 require (
+	github.com/caarlos0/env/v8 v8.0.0
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.0
 )
