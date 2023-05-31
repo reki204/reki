@@ -1,14 +1,13 @@
 package router
 
 import (
-	"context"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/reki204/reki/handler"
 )
 
-func SetRouting(ctx context.Context, router *gin.Engine) error {
+func SetRouting(router *gin.Engine) error {
 	router.NoRoute(handleNotFound)
 	router.NoMethod(handleInternalServerError)
 
