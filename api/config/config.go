@@ -5,7 +5,7 @@ import (
 )
 
 type ConfigList struct {
-	Port int `env:"PORT" envDefault:"80"`
+	Port int `env:"PORT" envDefault:"8080"`
 }
 
 func LoadConfig() (*ConfigList, error) {

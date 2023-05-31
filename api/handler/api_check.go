@@ -14,6 +14,6 @@ func NewApiCheckHandler() *ApiCheck {
 
 func (ac *ApiCheck) GetMessage(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
-		"message": "welcome",
+		"message": "welcome golang",
 	})
 }
