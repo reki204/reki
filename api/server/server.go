@@ -9,7 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/reki204/reki/config"
-	"github.com/reki204/reki/handler"
+	"github.com/reki204/reki/middleware"
 	routes "github.com/reki204/reki/router"
 )
 
@@ -72,7 +72,7 @@ func NewRouter(ctx context.Context) *gin.Engine {
 	r := gin.Default()
 	r.HandleMethodNotAllowed = true
 
-	r.Use(handler.SetCORS())
+	r.Use(middleware.SetCORS())
 
 	return r
 }
