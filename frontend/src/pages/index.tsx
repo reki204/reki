@@ -1,4 +1,4 @@
-import { getMessage } from "@/services/getApi";
+import { getMessage } from "@/service/getApi";
 
 export default function Home() {
   getMessage();
