@@ -1,7 +1,7 @@
-import { getMessage } from "@/service/getApi";
+import { messageService } from "@/services/messageService";
 
 export default function Home() {
-  getMessage();
+  messageService.getMessage();
   return (
     <>
       <h1>Hello World</h1>
